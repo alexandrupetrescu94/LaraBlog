@@ -13,7 +13,16 @@ class BlogController extends BaseController {
 		return View::make('login');
 	}
 	public function profile(){
-		return View::make('profile');
+		$view = View::make('profile');
+		//$view['articles']= Article::all()->user();
+		$articles= Category::with("articles")->get()->toArray();
+		//$users = $articles->user;
+		
+		echo "<pre>";
+		print_r($articles); 
+		echo "</pre>";	
+		exit;
+		return $view; 
 	}
 
 	public function signup(){
@@ -35,6 +44,7 @@ class BlogController extends BaseController {
 		{
     		return Redirect::to('profile');
 		}
+
 	}
 
 	public function logout(){

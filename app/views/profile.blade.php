@@ -11,13 +11,14 @@
 @stop
 
 @section('articles')
-	<?php /*	<ul>
+	<ul>
 	@foreach ($articles as $article)
 		<li>
-			{{$article->title}}
-			Written by: {{$article->user_id}}
-			{{$article->description}}
+			{{$article['title']}}
+			Written by: {{$article['user_id']}}
+			{{$article['description']}}
 		</li>
 	@endforeach
-	</ul> */ ?>
+	</ul>
+
 @stop
