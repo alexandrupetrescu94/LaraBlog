@@ -15,20 +15,31 @@ Route::filter('valid_user', function()
     $data = Input::except('_token');
     $rules = array(
         'username' => 'Required|Min:3|Max:80|Alpha',
-        'email'     => 'Required|Between:3,64|Email|Unique:users',
-        'password'  =>'Required|AlphaNum|Between:4,10'
+        'email'    => 'Required|Between:3,64|Email|Unique:users',
+        'password' => 'Required|AlphaNum|Between:4,10'
 	);
 
     $validator = Validator::make($data, $rules);
 
     if ($validator->fails())
-	    return Redirect::to('blog')->withErrors($validator->messages());
+	    return Redirect::to('/')->withErrors($validator->messages());
 
 });
 
+Route::filter('guest', function()
+{
+        if (Auth::check()) 
+                return Redirect::route('/')
+                        ->with('flash_notice', 'You are already logged in!');
+});
 
-Route::get('/','HomeController@showWelcome');
-Route::get('blog','BlogController@home');
 
-Route::post('blog/register',array('before'=>'csrf|valid_user','uses'=>'BlogController@userRegister'));
-Route::post('blog/login',array('before'=>'csrf','uses'=>'BlogController@userLogin'));
+
+Route::get('/','BlogController@home');
+Route::get('/register','BlogController@register');
+Route::get('/login','BlogController@login');
+Route::get('/profile',array('before' => 'auth' ,'uses' => 'BlogController@profile'));
+Route::get('/logout','BlogController@logout');
+
+Route::post('/signup',array('before'=>'csrf|valid_user','uses'=>'BlogController@signup'));
+Route::post('/signin',array('before'=>'csrf','uses'=>'BlogController@signin'));
