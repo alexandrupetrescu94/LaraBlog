@@ -6,7 +6,7 @@
 <body>
 	<div class="container">
 		<li>
-			<a href="{{URL::to('/')}}">Home</a>
+			<a href="{{URL::to('home')}}">Home</a>
 		</li>
 
 		<li>
@@ -21,5 +21,6 @@
 			<a href="{{URL::to('profile')}}">Profile</a>
 		</li>
 	</div>
+	<p>{{Session::get('message')}}</p>
 </body>
 </html>

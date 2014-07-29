@@ -20,7 +20,7 @@
 	      </ul>
 	    @endif
   	</div>
-  	<p></p>
+  	<p>{{Session::get('message')}}</p>
 
 </body>
 </html>

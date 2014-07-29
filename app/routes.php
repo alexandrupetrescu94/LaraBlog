@@ -22,24 +22,18 @@ Route::filter('valid_user', function()
     $validator = Validator::make($data, $rules);
 
     if ($validator->fails())
-	    return Redirect::to('/')->withErrors($validator->messages());
+	    return Redirect::to('home')->withErrors($validator->messages());
 
 });
 
-Route::filter('guest', function()
-{
-        if (Auth::check()) 
-                return Redirect::route('/')
-                        ->with('flash_notice', 'You are already logged in!');
-});
 
-
-
+Route::controller('/','BlogController');
+/*
 Route::get('/','BlogController@home');
 Route::get('/register','BlogController@register');
 Route::get('/login','BlogController@login');
-Route::get('/profile',array('before' => 'auth' ,'uses' => 'BlogController@profile'));
+
 Route::get('/logout','BlogController@logout');
 
 Route::post('/signup',array('before'=>'csrf|valid_user','uses'=>'BlogController@signup'));
-Route::post('/signin',array('before'=>'csrf','uses'=>'BlogController@signin'));
+Route::post('/signin',array('before'=>'csrf','uses'=>'BlogController@signin'));*/

@@ -11,6 +11,7 @@
 @stop
 
 @section('articles')
+	<h3>Articles written by you</h3>
 	<ul>
 	@foreach ($articles as $article)
 		<li>
