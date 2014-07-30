@@ -7,6 +7,7 @@ class BlogController extends BaseController {
 
 		$this->beforeFilter('csrf', array('on' => 'post'));
 		$this->beforeFilter('auth', array('only' =>array('profile','getProfile')));
+		$this->beforeFilter('valid_user', array('only'=> array('postSignup')));
 	}
 
 	public function getHome(){
@@ -25,7 +26,7 @@ class BlogController extends BaseController {
 		
 		//$articles= Category::with("articles")->get()->toArray();
 		$user_id = User::where('name','=',$name)->get(array('id'))->first();
-		$data['articles'] = User::find($user_id->id)->articles;
+		$data['articles'] = User::find($user_id->id)->articles()->paginate(2);
 
 		return View::make('profile',$data);  
 	}

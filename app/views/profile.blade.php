@@ -1,7 +1,7 @@
 @extends('layouts.profile_layout')
 
 @section('assets')
-<?php
+	<?php
 	echo HTML::script('js/jquery-1.9.0.js');
 	echo HTML::script('js/profile.js');
 	echo HTML::script('js/bootstrap.min.js');
@@ -21,5 +21,6 @@
 		</li>
 	@endforeach
 	</ul>
+	<?php echo str_replace("?page=","/pagina-",$articles->links()); ?>
 
 @stop
